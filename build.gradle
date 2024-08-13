@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group = 'dev.onecheetah'
+version = '0.1'
+archivesBaseName = 'zeta'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("net.dv8tion:JDA:5.0.2")
+    implementation("ch.qos.logback:logback-classic:1.5.6")
+    implementation ("io.github.classgraph:classgraph:4.8.174")
+
+    compileOnly("org.projectlombok:lombok:1.18.34")
+    annotationProcessor("org.projectlombok:lombok:1.18.34")
+
+    testCompileOnly("org.projectlombok:lombok:1.18.34")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.34")
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/OneCheetah/Zeta")
+            credentials {
+                username = System.getenv("USERNAME")
+                password = System.getenv("TOKEN")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            artifactId = 'zeta'
+            from(components.java)
+        }
+    }
+}
+
+
+test {
+    useJUnitPlatform()
+}
