@@ -13,7 +13,7 @@ repositories {
 
 dependencies {
     implementation("net.dv8tion:JDA:5.1.0")
-    implementation("ch.qos.logback:logback-classic:1.5.6")
+    implementation("ch.qos.logback:logback-classic:1.5.15")
     implementation ("io.github.classgraph:classgraph:4.8.174")
 
     compileOnly("org.projectlombok:lombok:1.18.34")
